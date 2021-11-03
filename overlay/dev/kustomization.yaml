@@ -4,7 +4,7 @@ bases:
 - ../../base
 images:
   - name: vfiftyfive/flask_marvel
-    newTag: 1.0_test
+    newTag: "1.0_test"
 patchesStrategicMerge:
 - ondat_local_storage_class.yaml
 - marvel_deployment_replicas.yaml

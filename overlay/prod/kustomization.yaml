@@ -4,7 +4,7 @@ bases:
 - ../../base
 images:
   - name: vfiftyfive/marvelapp-cfd-demo
-    newTag: 1.0
+    newTag: "1.0"
 patchesStrategicMerge:
 - ondat_local_storage_class.yaml
 - marvel_deployment_replicas.yaml
