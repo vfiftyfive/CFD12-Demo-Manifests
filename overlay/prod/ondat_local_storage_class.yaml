@@ -1,0 +1,12 @@
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ondat
+provisioner: csi.storageos.com
+allowVolumeExpansion: true
+parameters:
+  #local development environment requires 1 replica
+  storageos.com/replicas: "3" # Labels allowed only when using CSI
+  storageos.com/encryption: "true"
+  storageos.com/topology-aware: "true"
+  
