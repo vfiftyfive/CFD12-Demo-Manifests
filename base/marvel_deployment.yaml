@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: marvel-frontend
+  name: marvel-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: marvel-frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: marvel-frontend
+    spec:
+      containers:
+      - env:
+        - name: MONGO_HOST
+          value: mongodb-0.mongodb.default.svc.cluster.local
+        image: vfiftyfive/flask_marvel
+        name: flask-marvel
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
