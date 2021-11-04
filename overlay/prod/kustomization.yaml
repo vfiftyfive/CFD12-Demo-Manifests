@@ -1,12 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
-- ../../base
-images:
-  - name: vfiftyfive/marvelapp-cfd-demo
-    newTag: "1.0"
 patchesStrategicMerge:
 - ondat_local_storage_class.yaml
 - marvel_deployment_replicas.yaml
 - mongo_storage_class.yaml
-  
+resources:
+- ../../base
