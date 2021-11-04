@@ -4,5 +4,6 @@ patchesStrategicMerge:
 - ondat_local_storage_class.yaml
 - marvel_deployment_replicas.yaml
 - mongo_storage_class.yaml
+- no-storageclass.yaml
 resources:
 - ../../base

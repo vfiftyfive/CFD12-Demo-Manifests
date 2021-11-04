@@ -1,9 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
-- ../../base
 patchesStrategicMerge:
 - ondat_local_storage_class.yaml
 - marvel_deployment_replicas.yaml
 - mongo_storage_class.yaml
-  
+resources:
+- ../../base
+images:
+- name: vfiftyfive/flask_marvel
+  newName: vfiftyfive/flask_marvel
+  newTag: 1.0_test

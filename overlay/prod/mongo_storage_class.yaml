@@ -10,7 +10,7 @@ spec:
       name: database
     spec:
       accessModes: ["ReadWriteOnce"]
-      storageClassName: "ondat"
+      storageClassName: "ondat-tap"
       resources:
         requests:
           storage: 1Gi
