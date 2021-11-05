@@ -21,6 +21,7 @@ spec:
         - name: MONGO_HOST
           value: mongodb-0.mongodb.default.svc.cluster.local
         image: vfiftyfive/flask_marvel
+        imagePullPolicy: Always
         name: flask-marvel
         ports:
         - containerPort: 80
