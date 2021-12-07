@@ -47,7 +47,7 @@ spec:
       - env:
         - name: MONGO_HOST
           value: mongodb-0.mongodb.default.svc.cluster.local
-        image: vfiftyfive/marvelapp-cfd-demo@sha256:00c68b04bf79725b830102b575a01530d917665a307e9f967038b91b4539fa2c
+        image: vfiftyfive/marvelapp-cfd-demo@sha256:e69d1d359a629cfff2344f5dc687dcdbf086ce350cca7a57dab05a848489194a
         imagePullPolicy: Always
         name: flask-marvel
         ports:
