@@ -36,7 +36,7 @@ spec:
         command: ['sh', '-c']
         args:
         - |
-          mongod --replSet marvel-mongo --bind_ip localhost,$(HOSTNAME).mongodb.default.svc.cluster.local
+          mongod --replSet marvel-mongo --bind_ip localhost,$HOSTNAME.mongodb.default.svc.cluster.local
         ports:
         - containerPort: 27017
           name: peer
