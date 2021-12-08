@@ -33,10 +33,10 @@ spec:
         volumeMounts:
         - name: database
           mountPath: /data
-          command: ['sh', '-c']
-          args:
-          - |
-            mongod --replSet marvel-mongo --bind_ip localhost,$(HOSTNAME).mongodb.default.svc.cluster.local
+        command: ['sh', '-c']
+        args:
+        - |
+          mongod --replSet marvel-mongo --bind_ip localhost,$(HOSTNAME).mongodb.default.svc.cluster.local
         ports:
         - containerPort: 27017
           name: peer
