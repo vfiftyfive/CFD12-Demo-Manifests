@@ -1,0 +1,122 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: marvel-frontend
+  name: marvel-frontend
+  namespace: default
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: marvel-frontend
+  type: ClusterIP
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+spec:
+  clusterIP: None
+  ports:
+  - name: peer
+    port: 27017
+  selector:
+    app: mongo
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: marvel-frontend
+  name: marvel-frontend
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: marvel-frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: marvel-frontend
+    spec:
+      containers:
+      - env:
+        - name: MONGO_HOST
+          value: mongodb-0.mongodb.default.svc.cluster.local
+        image: vfiftyfive/marvelapp-cfd-demo@sha256:f1c88cc4385cc3612a05a5835fef11bcd1597e9cf5e6fefde1fa5ebae2e26c2d
+        imagePullPolicy: Always
+        name: flask-marvel
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: mongo
+  name: mongodb
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mongo
+  serviceName: mongodb
+  template:
+    metadata:
+      labels:
+        app: mongo
+    spec:
+      containers:
+      - args:
+        - |
+          mongod --replSet marvel-mongo --bind_ip localhost,$HOSTNAME.mongodb.default.svc.cluster.local
+        command:
+        - sh
+        - -c
+        image: mongo:5.0.5
+        name: mongodb
+        ports:
+        - containerPort: 27017
+          name: peer
+        volumeMounts:
+        - mountPath: /data
+          name: database
+  volumeClaimTemplates:
+  - metadata:
+      name: database
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 1Gi
+      storageClassName: ondat-tap
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  creationTimestamp: null
+  name: add-data-to-mongodb
+spec:
+  backoffLimit: 10
+  template:
+    metadata:
+      creationTimestamp: null
+    spec:
+      containers:
+      - env:
+        - name: MONGO_HOST
+          value: mongodb-0.mongodb.default.svc.cluster.local
+        - name: OFFSET
+          value: "600"
+        image: vfiftyfive/marvel_init_db
+        name: add-data-to-mongodb
+        resources: {}
+      restartPolicy: Never
+status: {}
