@@ -1,8 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- ondat_storage_class.yaml
-- mongo-sts.yaml
-- marvel_deployment.yaml
+- ondat_sc.yaml
+- mongo_sts.yaml
+- marvel_deploy.yaml
 - job.yaml
-- marvel_frontend_service.yaml
+- marvel_svc.yaml
