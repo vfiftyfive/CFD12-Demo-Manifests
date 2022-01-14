@@ -124,6 +124,15 @@ spec:
             requests:
               storage: 1Gi
           storageClassName: ondat-replicated
+      - metadata:
+          name: logs-volume
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: ondat-replicated
   type: ReplicaSet
   users:
   - db: admin
