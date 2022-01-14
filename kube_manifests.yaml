@@ -114,20 +114,6 @@ spec:
     spec:
       selector: {}
       serviceName: mongodb
-      template:
-        spec:
-          containers:
-          - args:
-            - |
-              mongod --replSet marvel-mongo --bind_ip localhost,$HOSTNAME.mongodb.default.svc.cluster.local
-            command:
-            - sh
-            - -c
-            name: mongodb
-          volumes:
-          - name: data-volume
-            persistentVolumeClaim:
-              claimName: mongodb-data
       volumeClaimTemplates:
       - metadata:
           name: data-volume
@@ -150,4 +136,4 @@ spec:
     - db: admin
       name: userAdminAnyDatabase
     scramCredentialsSecretName: my-scram
-  version: 5.0.3
+  version: 5.0.5

@@ -16,3 +16,11 @@ spec:
               resources:
                 requests:
                   storage: 1Gi
+          - metadata:
+              name: logs-volume
+            spec:
+              storageClassName: "ondat-replicated"
+              accessModes: [ "ReadWriteOnce" ]
+              resources:
+                requests:
+                  storage: 1Gi
