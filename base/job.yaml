@@ -12,8 +12,12 @@ spec:
       #ADD THE ENV SECTION TO CONFIGURE THE JOB PROCESS
       #AND SET THE TARGET DATABASE INSTANCE
       - env:
-        - name: MONGO_HOST
+        - name: MONGO_SEED0
           value: mongodb-0.mongodb.default.svc.cluster.local
+        - name: MONGO_SEED1
+          value: mongodb-1.mongodb.default.svc.cluster.local
+        - name: MONGO_SEED2
+          value: mongodb-2.mongodb.default.svc.cluster.local
         - name: OFFSET
           value: "600"
         image: vfiftyfive/marvel_init_db
