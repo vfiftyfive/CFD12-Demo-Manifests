@@ -3,22 +3,10 @@ kind: MongoDBCommunity
 metadata:
   name: mongodb
 spec:
-  version: "5.0.3"
+  version: "5.0.5"
   statefulSet:
       spec:
           # Specifies a size for the data volume different from the default 10Gi
-        template:
-          spec:
-            containers:
-              - name: mongodb
-                command: ['sh', '-c']
-                args:
-                - |
-                  mongod --replSet marvel-mongo --bind_ip localhost,$HOSTNAME.mongodb.default.svc.cluster.local
-            volumes:
-            - name: data-volume
-              persistentVolumeClaim:
-                claimName: mongodb-data
         volumeClaimTemplates:
           - metadata:
               name: data-volume
