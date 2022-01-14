@@ -3,7 +3,8 @@ kind: Kustomization
 patchesStrategicMerge:
 - ondat_sc.yaml
 - marvel_deploy.yaml
-- mongo_sts.yaml
+- mongodbcommunity_cr.yaml
+- mongodb_admin_secret.yaml
 resources:
 - ../../base
 images:
