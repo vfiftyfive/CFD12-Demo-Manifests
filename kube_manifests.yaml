@@ -14,13 +14,15 @@ volumeBindingMode: Immediate
 ---
 apiVersion: v1
 data:
-  MONGO_SEED0: mongodb-0.mongodb.svc.cluster.local
-  MONGO_SEED1: mongodb-1.mongodb.svc.cluster.local
-  MONGO_SEED2: mongodb-2.mongodb.svc.cluster.local
+  MONGO_PASSWORD: mongo
+  MONGO_SEED0: mongodb-0.mongodb.default.svc.cluster.local
+  MONGO_SEED1: mongodb-1.mongodb.default.svc.cluster.local
+  MONGO_SEED2: mongodb-2.mongodb.default.svc.cluster.local
+  MONGO_USERNAME: my-user
   OFFSET: "600"
 kind: ConfigMap
 metadata:
-  name: mongo-config-79t562f227
+  name: mongo-config-69f6ck6k82
 ---
 apiVersion: v1
 kind: Secret
@@ -57,27 +59,19 @@ spec:
   selector:
     matchLabels:
       app: marvel-frontend
-  strategy: {}
   template:
     metadata:
       labels:
         app: marvel-frontend
     spec:
       containers:
-      - env:
-        - name: MONGO_SEED0
-          value: mongodb-0.mongodb.default.svc.cluster.local
-        - name: MONGO_SEED1
-          value: mongodb-1.mongodb.default.svc.cluster.local
-        - name: MONGO_SEED2
-          value: mongodb-2.mongodb.default.svc.cluster.local
-        image: vfiftyfive/flask_marvel
-        imagePullPolicy: Always
+      - envFrom:
+        - configMapRef:
+            name: mongo-config-69f6ck6k82
+        image: vfiftyfive/marvel-frontend
         name: flask-marvel
         ports:
         - containerPort: 80
-        resources: {}
-status: {}
 ---
 apiVersion: batch/v1
 kind: Job
@@ -90,7 +84,7 @@ spec:
       containers:
       - envFrom:
         - configMapRef:
-            name: mongo-config-79t562f227
+            name: mongo-config-69f6ck6k82
         image: vfiftyfive/marvel_init_db
         name: add-data-to-mongodb
       restartPolicy: Never

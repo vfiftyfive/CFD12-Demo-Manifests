@@ -9,25 +9,16 @@ spec:
   selector:
     matchLabels:
       app: marvel-frontend
-  strategy: {}
   template:
     metadata:
-      creationTimestamp: null
       labels:
         app: marvel-frontend
     spec:
       containers:
-      - env:
-        - name: MONGO_SEED0
-          value: mongodb-0.mongodb.default.svc.cluster.local
-        - name: MONGO_SEED1
-          value: mongodb-1.mongodb.default.svc.cluster.local
-        - name: MONGO_SEED2
-          value: mongodb-2.mongodb.default.svc.cluster.local
-        image: vfiftyfive/flask_marvel
-        imagePullPolicy: Always
+      - envFrom:
+        - configMapRef:
+            name: mongo-config
         name: flask-marvel
+        image: vfiftyfive/flask_marvel
         ports:
         - containerPort: 80
-        resources: {}
-status: {}

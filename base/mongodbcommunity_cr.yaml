@@ -10,14 +10,16 @@ spec:
     authentication:
       modes: ["SCRAM"]
   users:
-    - name: my-user
+    - name: admin
       db: admin
       passwordSecretRef:
-        name: my-user-password
+        name: admin-password
       roles:
         - name: clusterAdmin
           db: admin
         - name: userAdminAnyDatabase
+          db: admin
+        - name: dbAdminAnyDatabase
           db: admin
       scramCredentialsSecretName: my-scram
   statefulSet:

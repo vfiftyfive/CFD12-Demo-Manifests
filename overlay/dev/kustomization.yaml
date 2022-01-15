@@ -8,9 +8,6 @@ patchesStrategicMerge:
 - job.yaml
 resources:
 - ../../base
-images:
-- name: vfiftyfive/flask_marvel
-- name: vfiftyfive/marvel-init-db
 configMapGenerator:
 - name: mongo-config
   literals:
