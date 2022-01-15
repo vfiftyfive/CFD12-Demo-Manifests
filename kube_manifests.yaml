@@ -1,0 +1,139 @@
+allowVolumeExpansion: true
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: ondat-replicated
+parameters:
+  csi.storage.k8s.io/fstype: ext4
+  csi.storage.k8s.io/secret-name: storageos-api
+  csi.storage.k8s.io/secret-namespace: storageos
+  storageos.com/replicas: "1"
+provisioner: csi.storageos.com
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-user-password
+stringData:
+  password: mongo
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: marvel-frontend
+  name: marvel-frontend
+  namespace: default
+spec:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: marvel-frontend
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: marvel-frontend
+  name: marvel-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: marvel-frontend
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app: marvel-frontend
+    spec:
+      containers:
+      - env:
+        - name: MONGO_SEED0
+          value: mongodb-0.mongodb.default.svc.cluster.local
+        - name: MONGO_SEED1
+          value: mongodb-1.mongodb.default.svc.cluster.local
+        - name: MONGO_SEED2
+          value: mongodb-2.mongodb.default.svc.cluster.local
+        image: vfiftyfive/flask_marvel
+        imagePullPolicy: Always
+        name: flask-marvel
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: add-data-to-mongodb
+spec:
+  backoffLimit: 10
+  template:
+    spec:
+      containers:
+      - env:
+        - name: MONGO_SEED0
+          value: mongodb-0.mongodb.default.svc.cluster.local
+        - name: MONGO_SEED1
+          value: mongodb-1.mongodb.default.svc.cluster.local
+        - name: MONGO_SEED2
+          value: mongodb-2.mongodb.default.svc.cluster.local
+        - name: OFFSET
+          value: "600"
+        image: vfiftyfive/marvel_init_db
+        name: add-data-to-mongodb
+      restartPolicy: Never
+---
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongodb
+spec:
+  members: 3
+  security:
+    authentication:
+      modes:
+      - SCRAM
+  statefulSet:
+    spec:
+      selector: {}
+      serviceName: mongodb
+      volumeClaimTemplates:
+      - metadata:
+          name: data-volume
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: ondat-replicated
+      - metadata:
+          name: logs-volume
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+          storageClassName: ondat-replicated
+  type: ReplicaSet
+  users:
+  - db: admin
+    name: my-user
+    passwordSecretRef:
+      name: my-user-password
+    roles:
+    - db: admin
+      name: clusterAdmin
+    - db: admin
+      name: userAdminAnyDatabase
+    scramCredentialsSecretName: my-scram
+  version: 5.0.5

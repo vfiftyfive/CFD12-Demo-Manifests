@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - ondat_sc.yaml
 - mongodbcommunity_cr.yaml
+- mongodb_admin_secret.yaml
 - marvel_deploy.yaml
 - job.yaml
 - marvel_svc.yaml
