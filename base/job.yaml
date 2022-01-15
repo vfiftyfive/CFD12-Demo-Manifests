@@ -1,12 +1,9 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  creationTimestamp: null
   name: add-data-to-mongodb
 spec:
   template:
-    metadata:
-      creationTimestamp: null
     spec:
       containers:
       #ADD THE ENV SECTION TO CONFIGURE THE JOB PROCESS
@@ -22,7 +19,6 @@ spec:
           value: "600"
         image: vfiftyfive/marvel_init_db
         name: add-data-to-mongodb
-        resources: {}
       restartPolicy: Never
   backoffLimit: 10
-status: {}
+
