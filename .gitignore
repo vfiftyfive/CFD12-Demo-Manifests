@@ -1,4 +1,0 @@
-.gitignore
-target/
-overlay/prod/
-kube_manifests.yaml
