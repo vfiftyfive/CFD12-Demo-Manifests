@@ -15,5 +15,5 @@ configMapGenerator:
   - MONGO_SEED1=mongodb-1.mongodb.default.svc.cluster.local
   - MONGO_SEED2=mongodb-2.mongodb.default.svc.cluster.local
   - OFFSET=600
-  - MONGO_USERNAME="my-user"
+  - MONGO_USERNAME="admin"
   - MONGO_PASSWORD="mongo"
