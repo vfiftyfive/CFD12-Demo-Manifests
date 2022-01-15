@@ -4,17 +4,13 @@ kind: StorageClass
 metadata:
   name: ondat-replicated
 parameters:
-  csi.storage.k8s.io/controller-expand-secret-name: csi-controller-expand-secret
-  csi.storage.k8s.io/controller-expand-secret-namespace: kube-system
-  csi.storage.k8s.io/controller-publish-secret-name: csi-controller-publish-secret
-  csi.storage.k8s.io/controller-publish-secret-namespace: kube-system
   csi.storage.k8s.io/fstype: ext4
-  csi.storage.k8s.io/node-publish-secret-name: csi-node-publish-secret
-  csi.storage.k8s.io/node-publish-secret-namespace: kube-system
-  csi.storage.k8s.io/provisioner-secret-name: csi-provisioner-secret
-  csi.storage.k8s.io/provisioner-secret-namespace: kube-system
+  csi.storage.k8s.io/secret-name: storageos-api
+  csi.storage.k8s.io/secret-namespace: storageos
   storageos.com/replicas: "1"
 provisioner: csi.storageos.com
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
 ---
 apiVersion: v1
 kind: Secret
@@ -76,13 +72,10 @@ status: {}
 apiVersion: batch/v1
 kind: Job
 metadata:
-  creationTimestamp: null
   name: add-data-to-mongodb
 spec:
   backoffLimit: 10
   template:
-    metadata:
-      creationTimestamp: null
     spec:
       containers:
       - env:
@@ -96,9 +89,7 @@ spec:
           value: "600"
         image: vfiftyfive/marvel_init_db
         name: add-data-to-mongodb
-        resources: {}
       restartPolicy: Never
-status: {}
 ---
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
