@@ -21,6 +21,8 @@ spec:
           db: admin
         - name: dbAdminAnyDatabase
           db: admin
+        - name: readWriteAnyDatabase
+          db: admin
       scramCredentialsSecretName: my-scram
   statefulSet:
       spec:
