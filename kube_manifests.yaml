@@ -13,6 +13,16 @@ reclaimPolicy: Delete
 volumeBindingMode: Immediate
 ---
 apiVersion: v1
+data:
+  MONGO_SEED0: mongodb-0.mongodb.svc.cluster.local
+  MONGO_SEED1: mongodb-1.mongodb.svc.cluster.local
+  MONGO_SEED2: mongodb-2.mongodb.svc.cluster.local
+  OFFSET: "600"
+kind: ConfigMap
+metadata:
+  name: mongo-config-79t562f227
+---
+apiVersion: v1
 kind: Secret
 metadata:
   name: my-user-password
@@ -78,15 +88,9 @@ spec:
   template:
     spec:
       containers:
-      - env:
-        - name: MONGO_SEED0
-          value: mongodb-0.mongodb.default.svc.cluster.local
-        - name: MONGO_SEED1
-          value: mongodb-1.mongodb.default.svc.cluster.local
-        - name: MONGO_SEED2
-          value: mongodb-2.mongodb.default.svc.cluster.local
-        - name: OFFSET
-          value: "600"
+      - envFrom:
+        - configMapRef:
+            name: mongo-config-79t562f227
         image: vfiftyfive/marvel_init_db
         name: add-data-to-mongodb
       restartPolicy: Never

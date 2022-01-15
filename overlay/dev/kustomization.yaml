@@ -5,8 +5,16 @@ patchesStrategicMerge:
 - marvel_deploy.yaml
 - mongodbcommunity_cr.yaml
 - mongodb_admin_secret.yaml
+- job.yaml
 resources:
 - ../../base
 images:
 - name: vfiftyfive/flask_marvel
 - name: vfiftyfive/marvel-init-db
+configMapGenerator:
+- name: mongo-config
+  literals:
+  - MONGO_SEED0=mongodb-0.mongodb.svc.cluster.local
+  - MONGO_SEED1=mongodb-1.mongodb.svc.cluster.local
+  - MONGO_SEED2=mongodb-2.mongodb.svc.cluster.local
+  - OFFSET=600
