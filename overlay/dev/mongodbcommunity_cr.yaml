@@ -9,6 +9,15 @@ spec:
       passwordSecretRef:
         name: admin-password
       scramCredentialsSecretName: admin-scram
+      roles:
+        - name: clusterAdmin
+          db: admin
+        - name: userAdminAnyDatabase
+          db: admin
+        - name: dbAdminAnyDatabase
+          db: admin
+        - name: readWriteAnyDatabase
+          db: admin
   statefulSet:
       spec:
           # Specifies a size for the data volume different from the default 10Gi
