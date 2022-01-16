@@ -15,7 +15,7 @@ spec:
         app: marvel-frontend
     spec:
       containers:
-        name: flask-marvel
+      - name: flask-marvel
         image: vfiftyfive/flask_marvel
         ports:
         - containerPort: 80
