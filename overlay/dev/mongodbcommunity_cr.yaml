@@ -6,9 +6,10 @@ spec:
   version: "5.0.5"
   users:
     - name: admin
+      db: admin
       passwordSecretRef:
         name: admin-password
-      scramCredentialsSecretName: admin-scram
+      scramCredentialsSecretName: admin
       roles:
         - name: clusterAdmin
           db: admin

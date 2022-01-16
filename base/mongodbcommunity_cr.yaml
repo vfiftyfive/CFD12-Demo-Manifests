@@ -11,12 +11,6 @@ spec:
       modes: ["SCRAM"]
   users:
     - name: admin
-      db: admin
-      roles:
-        - name: clusterAdmin
-          db: admin
-        - name: userAdminAnyDatabase
-          db: admin
   statefulSet:
       spec:
           # Name for the service object created by the operator
