@@ -9,4 +9,6 @@ spec:
       - envFrom:
         - configMapRef:
             name: mongo-config
+        - secretRef:
+            name: admin-password
         name: add-data-to-mongodb
