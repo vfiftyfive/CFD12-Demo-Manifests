@@ -16,3 +16,7 @@ configMapGenerator:
   - OFFSET=600
   - MONGO_USERNAME="admin"
   - MONGO_PASSWORD="mongo"
+secretGenerator:
+- name: admin-password
+  literals:
+  - MONGO_PASSWORD=mongo
