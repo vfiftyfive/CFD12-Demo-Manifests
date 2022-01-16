@@ -5,3 +5,10 @@ metadata:
 spec:
   #local development environment requires 2 replicas
   replicas: 2
+  containers:
+    - envFrom:
+      - configMapRef:
+          name: mongo-config
+      - secretRef:
+          name: admin-password
+      name: flask-marvel

@@ -15,9 +15,6 @@ spec:
         app: marvel-frontend
     spec:
       containers:
-      - envFrom:
-        - configMapRef:
-            name: mongo-config
         name: flask-marvel
         image: vfiftyfive/flask_marvel
         ports:

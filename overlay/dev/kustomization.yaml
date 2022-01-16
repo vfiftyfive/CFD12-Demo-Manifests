@@ -4,7 +4,6 @@ patchesStrategicMerge:
 - ondat_sc.yaml
 - marvel_deploy.yaml
 - mongodbcommunity_cr.yaml
-- mongodb_admin_secret.yaml
 - job.yaml
 resources:
 - ../../base
