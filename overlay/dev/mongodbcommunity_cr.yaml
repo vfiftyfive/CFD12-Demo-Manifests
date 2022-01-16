@@ -4,6 +4,11 @@ metadata:
   name: mongodb
 spec:
   version: "5.0.5"
+  users:
+    - name: admin
+      passwordSecretRef:
+        name: admin-password
+      scramCredentialsSecretName: admin-password
   statefulSet:
       spec:
           # Specifies a size for the data volume different from the default 10Gi

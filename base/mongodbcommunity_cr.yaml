@@ -12,8 +12,6 @@ spec:
   users:
     - name: admin
       db: admin
-      passwordSecretRef:
-        name: admin-password
       roles:
         - name: clusterAdmin
           db: admin
@@ -23,7 +21,6 @@ spec:
           db: admin
         - name: readWriteAnyDatabase
           db: admin
-      scramCredentialsSecretName: my-scram
   statefulSet:
       spec:
           # Name for the service object created by the operator
