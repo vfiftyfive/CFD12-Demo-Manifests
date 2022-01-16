@@ -1,0 +1,14 @@
+- op: add
+  path: "/spec/users/0/roles/-"
+  value:
+    name: dbAdminAnyDatabase
+    db: admin
+- op: add
+  path: "/spec/users/0/roles/-"
+  value:
+    name: readWriteAnyDatabase
+    db: admin
+
+
+
+  

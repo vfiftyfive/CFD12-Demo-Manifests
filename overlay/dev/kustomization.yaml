@@ -3,8 +3,15 @@ kind: Kustomization
 patchesStrategicMerge:
 - ondat_sc.yaml
 - marvel_deploy.yaml
-- mongodbcommunity_cr.yaml
+# - mongodbcommunity_cr.yaml
 - job.yaml
+patchesJson6902:
+- target:
+    group: mongodbcommunity.mongodb.com
+    version: v1
+    kind: MongoDBCommunity
+    name: mongodb
+  path: patch_mongodbcommunity_roles.yaml
 resources:
 - ../../base
 configMapGenerator:
