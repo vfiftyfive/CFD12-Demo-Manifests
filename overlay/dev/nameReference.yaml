@@ -3,5 +3,3 @@ nameReference:
   fieldSpecs:
   - kind: MongoDBCommunity
     path: spec/users/passwordSecretRef/name
-  - kind: MongoDBCommunity
-    path: spec/users/scramCredentialsSecretName

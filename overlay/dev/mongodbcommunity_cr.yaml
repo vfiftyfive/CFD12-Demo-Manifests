@@ -8,7 +8,7 @@ spec:
     - name: admin
       passwordSecretRef:
         name: admin-password
-      scramCredentialsSecretName: admin-password
+      scramCredentialsSecretName: admin-scram
   statefulSet:
       spec:
           # Specifies a size for the data volume different from the default 10Gi
