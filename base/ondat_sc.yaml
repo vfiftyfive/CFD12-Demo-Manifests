@@ -5,7 +5,6 @@ metadata:
 provisioner: csi.storageos.com
 allowVolumeExpansion: true
 parameters:
-  parameters:
   csi.storage.k8s.io/fstype: xfs
   csi.storage.k8s.io/secret-name: storageos-api
   csi.storage.k8s.io/secret-namespace: storageos

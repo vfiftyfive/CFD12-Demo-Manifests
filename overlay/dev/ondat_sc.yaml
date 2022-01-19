@@ -7,3 +7,4 @@ allowVolumeExpansion: true
 parameters:
   #local development environment requires 1 replica
   storageos.com/replicas: "1" # Labels allowed only when using CSI
+  storageos.com/encryption: "true"
