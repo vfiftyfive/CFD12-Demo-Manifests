@@ -20,4 +20,4 @@ secretGenerator:
   literals:
   - password=mongo
 configurations:
-- nameReference.yaml
+- name_reference.yaml
