@@ -17,6 +17,7 @@ patches:
       value: ondat-dev
 configMapGenerator:
 - name: mongo-config
+  namespace: dev
   literals:
   - MONGO_SEED0=mongodb-0.mongodb.dev.svc.cluster.local
   - MONGO_SEED1=mongodb-1.mongodb.dev.svc.cluster.local
