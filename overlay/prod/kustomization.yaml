@@ -5,6 +5,7 @@ patchesStrategicMerge:
 - mongodbcommunity_cr.yaml
 - job.yaml
 - ondat_sc.yaml
+- marvel_svc.yaml
 patches:
 - target:
     kind: StorageClass
@@ -25,7 +26,6 @@ configMapGenerator:
   - MONGO_USERNAME=admin
 secretGenerator:
 - name: admin-password
-  namespace: default
   literals:
   - password=mongo
 configurations:
