@@ -25,7 +25,6 @@ configMapGenerator:
   - MONGO_USERNAME=admin
 secretGenerator:
 - name: admin-password
-  namespace: dev
   literals:
   - password=mongo
 configurations:
