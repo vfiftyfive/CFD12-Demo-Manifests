@@ -6,5 +6,5 @@ provisioner: csi.storageos.com
 allowVolumeExpansion: true
 parameters:
   storageos.com/replicas: "2"
-  storageos.com/encrypted: "true"
+  storageos.com/encryption: "true"
   
