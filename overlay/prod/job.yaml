@@ -2,6 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: add-data-to-mongodb
+  namespace: default
 spec:
   template:
     spec:
