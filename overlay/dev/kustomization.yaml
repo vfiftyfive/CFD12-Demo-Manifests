@@ -7,6 +7,14 @@ patchesStrategicMerge:
 - job.yaml
 resources:
 - ../../base
+patches:
+- target:
+    kind: StorageClass
+    name: ondat-replicated
+  patch: |-
+    - op: replace
+      path: /metadata/name
+      value: ondat-dev
 configMapGenerator:
 - name: mongo-config
   literals:

@@ -5,6 +5,6 @@ metadata:
 provisioner: csi.storageos.com
 allowVolumeExpansion: true
 parameters:
-  #local development environment requires 1 replica
+  #local development environment requires 0 replica
   storageos.com/replicas: "0" # Labels allowed only when using CSI
-  storageos.com/encryption: "true"
+  storageos.com/encryption: "false"
