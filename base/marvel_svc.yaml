@@ -4,7 +4,6 @@ metadata:
   labels:
     app: marvel-frontend
   name: marvel-frontend
-  namespace: default
 spec:
   ports:
   - port: 8080
