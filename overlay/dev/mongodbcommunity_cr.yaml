@@ -26,7 +26,7 @@ spec:
           - metadata:
               name: data-volume
             spec:
-              storageClassName: "ondat-replicated"
+              storageClassName: "ondat-dev"
               accessModes: [ "ReadWriteOnce" ]
               resources:
                 requests:
@@ -34,7 +34,7 @@ spec:
           - metadata:
               name: logs-volume
             spec:
-              storageClassName: "ondat-replicated"
+              storageClassName: "ondat-dev"
               accessModes: [ "ReadWriteOnce" ]
               resources:
                 requests:
