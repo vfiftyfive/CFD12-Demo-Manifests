@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: marvel-frontend
-  namespace: dev
 spec:
   #local development environment requires 2 replicas
   replicas: 2
