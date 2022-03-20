@@ -17,7 +17,6 @@ resources:
 - ../../base
 configMapGenerator:
 - name: mongo-config
-  namespace: default
   literals:
   - MONGO_SEED0=mongodb-0.mongodb.default.svc.cluster.local
   - MONGO_SEED1=mongodb-1.mongodb.default.svc.cluster.local

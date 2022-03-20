@@ -2,7 +2,6 @@ apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
   name: mongodb
-  namespace: default
 spec:
   version: "5.0.5"
   users:
