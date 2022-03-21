@@ -11,8 +11,6 @@ spec:
         name: admin-password
       scramCredentialsSecretName: admin
       roles:
-        - name: clusterAdmin
-          db: admin
         - name: userAdminAnyDatabase
           db: admin
         - name: dbAdminAnyDatabase
@@ -30,7 +28,7 @@ spec:
               accessModes: [ "ReadWriteOnce" ]
               resources:
                 requests:
-                  storage: 1Gi
+                  storage: 50Gi
           - metadata:
               name: logs-volume
             spec:
