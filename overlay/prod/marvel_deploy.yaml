@@ -5,7 +5,7 @@ metadata:
   namespace: default
 spec:
   #local development environment requires 2 replicas
-  replicas: 2
+  replicas: 5
   template:
     spec:
       containers:
