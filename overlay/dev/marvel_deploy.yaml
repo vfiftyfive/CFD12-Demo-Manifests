@@ -4,7 +4,7 @@ metadata:
   name: marvel-frontend
 spec:
   #local development environment requires 2 replicas
-  replicas: 2
+  replicas: 3
   template:
     spec:
       containers:
