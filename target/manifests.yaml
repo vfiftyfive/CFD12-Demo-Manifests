@@ -69,7 +69,7 @@ spec:
             name: mongo-config-b29f887ch6
         - secretRef:
             name: admin-password-df8t2cdf9f
-        image: vfiftyfive/marvelapp-cfd-demo@sha256:6c38f9aaed885da176e80ce010b3b60d6fb2983d2f646700316456696039f7d0
+        image: vfiftyfive/marvelapp-cfd-demo@sha256:db9c2cb0cdfb436812579d45293284e31e4a23a843ceb4069096c7d45c863216
         name: flask-marvel
         ports:
         - containerPort: 80
