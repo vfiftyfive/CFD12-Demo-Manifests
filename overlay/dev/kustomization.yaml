@@ -1,12 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+namespace: dev
 patchesStrategicMerge:
 - ondat_sc.yaml
 - marvel_deploy.yaml
 - mongodbcommunity_cr.yaml
 - job.yaml
-resources:
+bases:
 - ../../base
+resources:
+- namespace.yaml
 patches:
 - target:
     kind: StorageClass
